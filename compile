@@ -1,11 +1,6 @@
 #!/bin/bash
 BASEDIR=$(cd "$(dirname "$0")"; pwd)
 TMPDIR=$BASEDIR/tmp
-for var in "$@"
-do
-    export "$var"
-    echo $KERNEL_BITS
-done
 [[ "$1" == "--latest" ]] && NGINXV=nginx-1.7.4 || NGINXV=nginx-1.6.2
 echo "nginx version "$NGINXV" selected" 
 NGINXDIR=$NGINXV/
