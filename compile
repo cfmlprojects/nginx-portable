@@ -1,14 +1,14 @@
 #!/bin/bash
 BASEDIR=$(cd "$(dirname "$0")"; pwd)
 TMPDIR=$BASEDIR/tmp
-[[ "$1" == "--latest" ]] && NGINXV=nginx-1.7.4 || NGINXV=nginx-1.6.2
+[[ "$1" == "--latest" ]] && NGINXV=nginx-1.11.5 || NGINXV=nginx-1.10.1
 echo "nginx version "$NGINXV" selected" 
 NGINXDIR=$NGINXV/
 
-[[ "$1" == "--latest" ]] && PCREV=8.36 || PCREV=8.36
+[[ "$1" == "--latest" ]] && PCREV=8.39 || PCREV=8.39
 PCREDIR=$BASEDIR/tmp/pcre-$PCREV/
 
-[[ "$1" == "--latest" ]] && OPENSSLV=1.0.2 || OPENSSLV=1.0.2
+[[ "$1" == "--latest" ]] && OPENSSLV=1.1.0c || OPENSSLV=1.1.0c
 OPENSSLDIR=$BASEDIR/tmp/openssl-$OPENSSLV
 
 if [ -r $BASEDIR/bin/nginx ] ; then
@@ -80,8 +80,7 @@ fi
 --with-pcre=$PCREDIR --with-pcre-opt="--prefix=/tmp" 
 
 echo "Building executable."
-make -s
-#make -s > /dev/null
+make >> ../../logs/compile.log
 
 # Move bin file into appropriate dir
 if [ ! -d $BASEDIR/bin/ ]; then
